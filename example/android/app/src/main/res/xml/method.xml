@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<input-method xmlns:android="http://schemas.android.com/apk/res/android">
+    <subtype android:name="Nom"
+        android:languageTag="en-US"
+        android:imeSubtypeMode="keyboard"
+        android:imeSubtypeExtraValue="somePrivateOption=true" />
+    <subtype android:name="Quoc Ngu"
+        android:languageTag="fr-FR"
+        android:imeSubtypeMode="keyboard"
+        android:imeSubtypeExtraValue="someVariable=30,someInternalOption=false" />
+</input-method>

@@ -3,19 +3,20 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:input_method_service/input_method_service.dart';
+import 'package:input_method_service/input_method_widget.dart';
 
-// /// This is on alternate entrypoint for this module to display Flutter UI in
-// /// a (multi-)view integration scenario.
-// // This is unfortunately in this file due to
-// // https://github.com/flutter/flutter/issues/72630.
-// @pragma("vm:entry-point")
-// void showCell() {
-//   runApp(
-//     const InputMethodWidget(
-//       child: FlutterLogo(),
-//     ),
-//   );
-// }
+/// This is on alternate entrypoint for this module to display Flutter UI in
+/// a (multi-)view integration scenario.
+// This is unfortunately in this file due to
+// https://github.com/flutter/flutter/issues/72630.
+@pragma("vm:entry-point")
+void showCell() {
+  runApp(
+    const InputMethodWidget(
+      child: FlutterLogo(),
+    ),
+  );
+}
 
 void main() {
   // This call ensures the Flutter binding has been set up before creating the

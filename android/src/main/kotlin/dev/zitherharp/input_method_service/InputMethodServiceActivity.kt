@@ -4,27 +4,27 @@ import android.content.Intent
 import android.os.Bundle
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
+import io.flutter.embedding.engine.dart.DartExecutor
 
 open class InputMethodServiceActivity : FlutterActivity() {
     private lateinit var flutterViewEngine: InputMethodServiceEngine
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        // TODO: create a multi-engine version after
-        // https://github.com/flutter/flutter/issues/72009 is built.
         val engine = FlutterEngine(applicationContext)
 //        engine.dartExecutor.executeDartEntrypoint(
 //            DartExecutor.DartEntrypoint(
 //                FlutterInjector.instance().flutterLoader().findAppBundlePath(),
 //                "showCell"),)
-
         flutterViewEngine = InputMethodServiceEngine(engine)
-        // The activity and FlutterView have different lifecycles.
-        // Attach the activity right away but only start rendering when the
-        // view is also scrolled into the screen.
-        flutterViewEngine.attachToActivity(this)
+//        // The activity and FlutterView have different lifecycles.
+//        // Attach the activity right away but only start rendering when the
+//        // view is also scrolled into the screen.
+//        flutterViewEngine.attachToActivity(this)
+//        flutterViewEngine?.dartExecutor?.executeDartEntrypoint(
+//            DartExecutor.DartEntrypoint.createDefault()
+//        )
     }
 
     override fun onDestroy() {

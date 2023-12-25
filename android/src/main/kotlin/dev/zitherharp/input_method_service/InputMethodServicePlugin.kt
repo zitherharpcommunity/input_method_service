@@ -2,6 +2,9 @@ package dev.zitherharp.input_method_service
 
 import android.inputmethodservice.InputMethodService
 import android.view.View
+import io.flutter.FlutterInjector
+import io.flutter.embedding.engine.FlutterEngine
+import io.flutter.embedding.engine.dart.DartExecutor
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -17,13 +20,21 @@ class InputMethodServicePlugin: InputMethodService(), FlutterPlugin, MethodCallH
   }
 
   override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-    flutterChannel = MethodChannel(flutterPluginBinding.binaryMessenger, METHOD_CHANNEL_NAME)
-    flutterChannel.setMethodCallHandler(this)
-    flutterChannel.invokeMethod(COMMIT_TEXT_METHOD, null)
+    flutterChannel = MethodChannel(flutterPluginBinding.binaryMessenger, METHOD_CHANNEL_NAME).apply {
+      setMethodCallHandler(this@InputMethodServicePlugin)
+      invokeMethod(COMMIT_TEXT_METHOD, "key")
+    }
   }
 
   override fun onCreateInputView(): View {
-    return layoutInflater.inflate(R.layout.activity_main, null)
+    val engine = FlutterEngine(applicationContext)
+    engine.dartExecutor.executeDartEntrypoint(
+      DartExecutor.DartEntrypoint(
+        FlutterInjector.instance().flutterLoader().findAppBundlePath(),
+        "showCell"))
+
+    val flutterViewEngine = InputMethodServiceEngine(engine)
+      return flutterViewEngine.flutterView!!
   }
 
   override fun onMethodCall(call: MethodCall, result: Result) {
